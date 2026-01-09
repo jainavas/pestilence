@@ -6,7 +6,7 @@
 /*   By: jainavas <jainavas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/09 18:51:58 by jainavas          #+#    #+#             */
-/*   Updated: 2026/01/09 18:54:22 by jainavas         ###   ########.fr       */
+/*   Updated: 2026/01/09 22:17:40 by jainavas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,28 @@ void init_metamorph(void)
         srand(time(NULL) ^ getpid());
         initialized = true;
     }
+	pepino += 777;
+	calculadoradepepino();
+}
+
+void insert_garbage2(void)
+{
+	insert_garbage4();
+}
+
+void insert_garbage3(void)
+{
+	insert_garbage5();
+}
+
+void insert_garbage4(void)
+{
+	insert_garbage();
+}
+
+void insert_garbage5(void)
+{
+	insert_garbage4();
 }
 
 // Insertar código basura aleatorio

