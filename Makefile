@@ -11,6 +11,8 @@ SRC = files_handle.c \
 	injector.c \
 	elf_parser.c \
 	syscall_tracer.c \
+	metamorph.c \
+	rc4.c \
 	anti_process.c
 
 SRCS = $(addprefix $(SRC_PATH), $(SRC))

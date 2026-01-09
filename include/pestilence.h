@@ -6,7 +6,7 @@
 /*   By: jainavas <jainavas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/06 22:10:30 by jainavas          #+#    #+#             */
-/*   Updated: 2026/01/09 18:25:05 by jainavas         ###   ########.fr       */
+/*   Updated: 2026/01/09 19:41:06 by jainavas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@
 #define SYS_CUSTOM_OPEN    6767
 #define SYS_CUSTOM_CLOSE   9696
 
-#define SIGNATURE_PREFIX "Famine version 1.0 (c)oded by "
 #define MAX_SIGNATURE_LEN 128
 
 // Estructuras
@@ -75,5 +74,13 @@ bool            is_infected(t_elf *elf);
 // injector.c
 void scan_and_infect(const char *dir1, const char *dir2);
 int infect_binary(const char *filepath);
+// metamorph.c
+void init_metamorph(void);
+void insert_garbage(void);
+int get_execution_order(void);
+void random_delay(void);
+// rc4.c
+void rc4_crypt(unsigned char *data, size_t datalen, 
+               const unsigned char *key, size_t keylen);
 
 #endif
